@@ -95,11 +95,13 @@ void QCAST::path_assignment(){
         vector<int> neighbors;
         for(int reqno = 0;reqno<(int)requests.size();reqno++){   //find the best path for every request
             Request &request = requests[reqno];
-            if(request.get_paths().size() > request.get_send_limit()){ // revise major path select
+            /*
+			if(request.get_paths().size() > request.get_send_limit()){ // revise major path select
                 //force to find no path
                 candidate[reqno] = CandPath();
                 continue;
             }
+			*/
             for(int i=0;i<(int)graph.get_size();i++){//initialize the distance
                 dis[i] = -1;
                 parent[i] = -1;
@@ -193,7 +195,7 @@ void QCAST::path_assignment(){
         assign_resource(candidate[mx_reqno].path, mx_reqno);
     }
 
-    find_recovery_path(0);
+    find_recovery_path(3);
     if(DEBUG) cerr<< "---------QCAST::path_assignment----------end" << endl;
 }
 
